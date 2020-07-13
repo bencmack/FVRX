@@ -1,7 +1,7 @@
-// module.exports = (sequelize, Sequelize) => {
-//   var User = sequelize.define('User', {
-//     pin: Sequelize.STRING
-//   });
-//
-//   return User;
-// }
+module.exports = (sequelize, Sequelize) => {
+  var User = sequelize.define('user', {
+    pin: Sequelize.STRING
+  });
+
+  return User;
+}
