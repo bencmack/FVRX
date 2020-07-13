@@ -4,7 +4,8 @@
   "description": "fruit and vegetable prescription program",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server.js"
   },
   "author": "E Moore / B Cormack",
   "license": "ISC",
