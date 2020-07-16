@@ -1,7 +1,6 @@
-'use strict';
-
-const dbConfig = require('../config/db.config.js');
+const dbConfig = require('./db.config.js');
 const Sequelize = require('sequelize');
+
 const sequelize = new Sequelize(
   dbConfig.DB,
   dbConfig.USER,
@@ -17,12 +16,4 @@ const sequelize = new Sequelize(
     }
   });
 
-const db = {};
-
-db.Sequelize = Sequelize;
-db.sequelize = sequelize;
-
-db.rx = require('./rx.js')(sequelize, Sequelize);
-db.user = require('./user.js')(sequelize, Sequelize);
-
-module.exports = db;
+module.exports = sequelize;
