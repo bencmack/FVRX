@@ -3,7 +3,7 @@ const sequelize = require('./sequelize');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-var User = sequelize.define('user', {
+const User = sequelize.define('user', {
   id:{
     type: Sequelize.UUID,
     allowNull: false,
@@ -15,30 +15,22 @@ var User = sequelize.define('user', {
     type: Sequelize.STRING,
     allowNull: false
    }
+},{
+  instanceMethods: {
+    toJSON: function () {
+      var user = Object.assign({}, this.get());
+
+      delete user.password;
+      return user;
+    }
+  }
 });
 
-// modify JSON to not return password in JSON responses
-// User.prototype.toJSON = function() {
-//   var user = Object.assign({}, this.get());
-//
-//   delete user.password;
-//   return user;
-// }
-//
-// User.prototype.generateAuthToken = function() {
-//   const access = 'auth';
-//   const payload = {
-//     id: this.id,
-//     access: 'auth'
-//   };
-//
-//   const token = jwt.sign(payload, process.env.JWT_SECRET);
-//
-//   return sequelize.models.token.create({
-//     access,
-//     token,
-//     userId: this.id
-//   })
-// }
+User.hook('beforeCreate', user => {
+  return bcrypt.genSalt(10)
+    .then((salt) => bcrypt.hash(user.password, salt))
+    .then((hash) => user.password = hash);
+});
+
 
 module.exports = User;

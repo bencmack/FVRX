@@ -1,40 +1,46 @@
 const express = require('express');
-const app = express.Router();
 const _ = require('lodash');
 
-const db = require('../models');
+const db = require('../db');
+const { User } = db.models;
+
+const router = express.Router();
+
 
 const findUser = (req, res) => {
   res.send({ payload: req.user })
 };
 
-const logout = async (req, res) => {
-  let { token } = req;
+// const logout = async (req, res) => {
+//   let { token } = req;
+//
+//   // db.Token.removeToken(token)
+//   //   .then(() => res.sendStatus(204))
+//   //   .catch(next)
+//
+//   try {
+//     let removedToken = db.Token.removeToken(token);
+//     res.sendStatus(204)
+//   } catch (err) {
+//     res.status(500).send({error: err.message || 'Error occurred while trying to logout'}).
+//   };
+// };
 
-  // db.Token.removeToken(token)
-  //   .then(() => res.sendStatus(204))
-  //   .catch(next)
+
+router.post('/', async (req, res) => {
+  let body = _.pick(req.body, ['pinName', 'password']);
 
   try {
-    let removedToken = db.Token.removeToken(token);
-    res.sendStatus(204)
-  } catch (err) {
-    res.status(500).send({error: err.message || 'Error occurred while trying to logout'}).
-  };
-};
+    let user = await User.create(body);
+    return res.status(200).send({payload: user});
+  } catch (e) {
+    return res.status(400).send({error: e || 'Error occurred while creating the user.'});
+  }
+});
 
-const createUser = async (req, res) => {
-  let body = _.pick(req.body, ['rx', 'password']);
-  try {
-    let newUser = await db.User.create(body);
-    res.send(newUser);
-  } catch (err) {
-    res.status(500).send({error: err.message || 'Error occurred while creating the User.'})
-  };
-};
 
 //logout [add auth]
 
-app.post('logout', logout);
+// router.post('logout', logout);
 
-module.exports = app;
+module.exports = router;

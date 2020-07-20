@@ -16,6 +16,7 @@ router.post('/', async (req, res) => {
     charset += String.fromCharCode(Math.floor((Math.random() * 25) + 97))
   }
 
+  // revisit this, it's possible to not return 3 digit number
   let numset = Math.floor(Math.random() * 1000);
 
   body.rxid = charset + numset;
