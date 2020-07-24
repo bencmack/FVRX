@@ -9,6 +9,7 @@ const { Rx } = db.models;
 const router = express.Router();
 /* add authentication */
 router.post('/', async (req, res) => {
+  console.log('post request made it here')
   let body = _.pick(req.body, ['mrn', 'phone', 'amount']);
 
   let charset ='';
@@ -25,6 +26,7 @@ router.post('/', async (req, res) => {
     let rx = await Rx.create(body)
     return res.status(200).send({payload: 'success!'})
   } catch (e) {
+    console.log(e)
     return res.status(400).send({error: e || 'Error creating a prescription'});
   }
 });
@@ -54,8 +56,6 @@ router.get('/:phone', async (req, res) => {
 router.patch('/:rxid', async (req, res) => {
   let { rxid } = req.params;
   let { market } = req.body;
-  let redeemDate = moment();
-  let expiryDate = moment().add(1, 'h');
 
   try {
     let [rx, metadata] = await db.sequelize.query(`

@@ -15,6 +15,10 @@ const Token = sequelize.define('token', {
     allowNull: false,
     primaryKey: true,
     defaultValue: Sequelize.UUIDV4
+  },
+  userId: {
+    type: Sequelize.UUID,
+    allowNull: false
   }
 })
 

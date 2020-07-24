@@ -7,26 +7,11 @@ const { User } = db.models;
 const router = express.Router();
 
 
-const findUser = (req, res) => {
-  res.send({ payload: req.user })
-};
-
-// const logout = async (req, res) => {
-//   let { token } = req;
-//
-//   // db.Token.removeToken(token)
-//   //   .then(() => res.sendStatus(204))
-//   //   .catch(next)
-//
-//   try {
-//     let removedToken = db.Token.removeToken(token);
-//     res.sendStatus(204)
-//   } catch (err) {
-//     res.status(500).send({error: err.message || 'Error occurred while trying to logout'}).
-//   };
+// const findUser = (req, res) => {
+//   res.send({ payload: req.user })
 // };
 
-
+// Create a user
 router.post('/', async (req, res) => {
   let body = _.pick(req.body, ['pinName', 'password']);
 
@@ -39,8 +24,5 @@ router.post('/', async (req, res) => {
 });
 
 
-//logout [add auth]
-
-// router.post('logout', logout);
 
 module.exports = router;
