@@ -62,15 +62,15 @@ class App extends Component {
   };
 
   marketSelected(market) {
-    this.setState({ redeemMarketLoading: true });
+    //this.setState({ redeemMarketLoading: true });
 
-    const { redeemRxId } = this.state;
-    console.log(market);
-    //send selected market to server, update corresponding rxId
-    axios.patch(`${serverName}/api/rx/${redeemRxId}`,{ market })
-      .then((res) => console.log(res))
-        .catch((e) => console.log(e));
-
+    // const { redeemRxId } = this.state;
+    // console.log(market);
+    // //send selected market to server, update corresponding rxId
+    // axios.patch(`${serverName}/api/rx/${redeemRxId}`,{ market })
+    //   .then((res) => console.log(res))
+    //     .catch((e) => console.log(e));
+    this.setState({ redeemMarket: market });
   };
 
   pinChange(evt) {
@@ -84,7 +84,7 @@ class App extends Component {
 
     if (isNaN(pin) || pin.length !== 4) { //validate pin is 4 digit number
       alert('Invalid PIN, please try again.') //throw error if format is invalid
-    } else if (pin !== '1234') { //validate pin is correct
+    } else if (pin !== '7262') { //validate pin is correct
       alert('Incorrect PIN, please try again.') //throw error if pin is incorrect
     } else {
       this.setState({ display: 'RxDetails', pin: '' }); //log user in
