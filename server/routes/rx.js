@@ -40,6 +40,21 @@ router.get('/:phone', async (req, res) => {
       WHERE phone=${phone} AND (expiryDate >= NOW() OR expiryDate is NULL)
       ORDER BY createdAt DESC LIMIT 1
       `)
+
+    let updateLatest = await db.models.Rx.update({
+      redeemDate: moment().format('YYYY-MM-DD HH:mm:ss'),
+      expiryDate: moment().add(1,'hour').format('YYYY-MM-DD HH:mm:ss')
+    },{
+      where: {rxid: rx.rxid}
+    });
+    //
+    // let [updatedRxes ,meta] = await db.sequelize.query(`
+    //   UPDATE rxes
+    //   SET expiryDate = NOW()
+    //   WHERE phone = "${rx.phone}" AND rxid <> "${rx.rxid}" AND expiryDate is NULL
+    //   `)
+
+
     if (!rx) {
       return res.status(404).send({error: 'No matching prescriptions'})
     }
@@ -57,27 +72,30 @@ router.patch('/:rxid', async (req, res) => {
   let { rxid } = req.params;
   let { market } = req.body;
 
-  console.log('rxid is: ',rxid);
-  console.log('market is: ', market);
+
+  console.log('rxid is: ',rxid)
+  console.log('market is: ', market)
 
   try {
-    let [rx, metadata] = await db.sequelize.query(`
-      UPDATE rxes
-      SET redeemDate = NOW(),
-          expiryDate = NOW() + INTERVAL 1 HOUR,
-          market = '${market}'
-      WHERE rxid = '${rxid}'
-      `)
+    let updated = await db.models.Rx.update(
+      {
+        market: market
+      },
+      {
+        where: { rxid: rxid }
+      }
+    )
 
-    console.log('This is rx \n\n', rx);
+    let rx = await db.models.Rx.findOne({where: {rxid: rxid}})
+    console.log(rx);
 
-    let [updatedRxes ,meta] = await db.sequelize.query(`
-      UPDATE rxes
-      SET expiryDate = NOW()
-      WHERE phone = '${rx.phone}' AND rxid <> '${rxid}' AND expiryDate is NULL
-      `)
-
-    console.log('This is updatedRxes \n\n',updatedRxes);
+    // let [updatedRxes ,meta] = await db.sequelize.query(`
+    //   UPDATE rxes
+    //   SET expiryDate = NOW()
+    //   WHERE phone = ${rx.phone} AND rxid <> ${rxid} AND expiryDate is NULL
+    //   `)
+    //
+    // console.log('This is updatedRxes \n\n',updatedRxes);
 
     return res.status(200).send({payload: {rx}})
   } catch (e) {
