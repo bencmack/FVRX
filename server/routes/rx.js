@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
 
   try {
     let rx = await Rx.create(body)
-    return res.status(200).send({payload: 'success!'})
+    return res.status(200).send({payload: rx})
   } catch (e) {
     console.log(e)
     return res.status(400).send({error: e || 'Error creating a prescription'});
@@ -57,13 +57,16 @@ router.patch('/:rxid', async (req, res) => {
   let { rxid } = req.params;
   let { market } = req.body;
 
+  console.log('rxid is: ',rxid);
+  console.log('market is: ', market);
+
   try {
     let [rx, metadata] = await db.sequelize.query(`
       UPDATE rxes
       SET redeemDate = NOW(),
-          expiryDate = NOW + INTERVAL 1 HOUR,
-          market = ${market}
-      WHERE rxid = ${rxid}
+          expiryDate = NOW() + INTERVAL 1 HOUR,
+          market = '${market}'
+      WHERE rxid = '${rxid}'
       `)
 
     console.log('This is rx \n\n', rx);
@@ -71,13 +74,14 @@ router.patch('/:rxid', async (req, res) => {
     let [updatedRxes ,meta] = await db.sequelize.query(`
       UPDATE rxes
       SET expiryDate = NOW()
-      WHERE phone = ${rx.phone} AND rxid <> ${rxid} AND expiryDate is NULL
+      WHERE phone = '${rx.phone}' AND rxid <> '${rxid}' AND expiryDate is NULL
       `)
 
     console.log('This is updatedRxes \n\n',updatedRxes);
 
     return res.status(200).send({payload: {rx}})
   } catch (e) {
+    console.log(e);
     return res.status(400).send({error: e || 'Error updating prescription.'})
   }
 })

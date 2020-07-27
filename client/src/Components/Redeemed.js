@@ -5,39 +5,43 @@ class Redeemed extends Component {
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      market: ''
-    };
   };
 
   render() {
 
     let toggleDisplay = () => {
-      if (this.state.market === '') {
+      if (this.props.market === '') {
         return (
           <div className="Market-select">
             <p className="subheader_1_with_margin">
               Please select your market:
             </p>
-            <button className="button-alt" onClick={() => this.setState({ market: 'Fort Washington Greenmarket' })}>
+            <button className="button-alt" onClick={() => this.props.onMarketSelect('Fort Washington Greenmarket')}>
               Fort Washington Greenmarket
             </button>
-            <button className="button-alt" onClick={() => this.setState({ market: '175th Street Greenmarket' })}>
+            <button className="button-alt" onClick={() => this.props.onMarketSelect('175th Street Greenmarket')}>
               175th Street Greenmarket
             </button>
-            <button className="button-alt" onClick={() => this.setState({ market: 'Inwood Greenmarket' })}>
+            <button className="button-alt" onClick={() => this.props.onMarketSelect('Inwood Greenmarket')}>
               Inwood Greenmarket
             </button>
-            <button className="button-alt" onClick={() => this.setState({ market: 'Broadway Practice Youth Market' })}>
+            <button className="button-alt" onClick={() => this.props.onMarketSelect('Broadway Practice Youth Market')}>
               Broadway Practice Youth Market
             </button>
-            <button className="button-alt" onClick={() => this.setState({ market: 'Bronx Borough Hall Greenmarket' })}>
+            <button className="button-alt" onClick={() => this.props.onMarketSelect('Bronx Borough Hall Greenmarket')}>
               Bronx Borough Hall Greenmarket
             </button>
-            <button className="button-alt" onClick={() => this.setState({ market: 'Lincoln Hospital Greenmarket' })}>
+            <button className="button-alt" onClick={() => this.props.onMarketSelect('Lincoln Hospital Greenmarket')}>
               Lincoln Hospital Greenmarket
             </button>
+          </div>
+        )
+      } else if (this.props.loading) {
+        return (
+          <div className="Market-select">
+            <p className="subheader_1_with_margin">
+              Loading...
+            </p>
           </div>
         )
       } else {
@@ -65,7 +69,7 @@ class Redeemed extends Component {
 
       <div className="Redeemed-amount-display">
         <p className="Redeemed-amount-text">
-          $20
+          {`$${this.props.redeemAmount}`}
         </p>
       </div>
 

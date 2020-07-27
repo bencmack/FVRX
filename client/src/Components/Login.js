@@ -6,6 +6,27 @@ import tomato from '../Images/tomato.PNG';
 import carrot from '../Images/carrot.PNG'
 
 const Login = (props) => {
+
+  let toggleRedeemLoading = () => {
+    if (props.redeemLoading) {
+      return (
+        <p className="subheader_2">
+          Loading...
+        </p>
+      )
+    } else {
+      return (
+        <button
+          type='button'
+          className='button'
+          onClick={props.onRedeem}
+        >
+        Redeem
+        </button>
+      )
+    }
+  };
+
   return (
     <div className="App">
 
@@ -33,13 +54,7 @@ const Login = (props) => {
         maxlength="10"
       />
 
-      <button
-        type='button'
-        className='button'
-        onClick={props.onRedeem}
-      >
-      Redeem
-      </button>
+      {toggleRedeemLoading()}
 
       <p className="subheader_1_with_margin">
         RDs

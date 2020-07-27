@@ -2,6 +2,27 @@ import React from 'react';
 import '../Styling/App.css';
 
 const RxDetails = (props) => {
+
+  let toggleLoading = () => {
+    if (props.loading) {
+      return (
+        <p className="subheader_2">
+          Loading...
+        </p>
+      )
+    } else {
+      return (
+        <button
+          type='button'
+          className='button'
+          onClick={props.onCreateRx}
+        >
+        Create Rx
+        </button>
+      )
+    };
+  };
+
   return (
     <div className="App">
 
@@ -47,13 +68,7 @@ const RxDetails = (props) => {
       </select>
       </div>
 
-      <button
-        type='button'
-        className='button'
-        onClick={props.onCreateRx}
-      >
-      Create Rx
-      </button>
+      {toggleLoading()}
 
     </div>
   );
