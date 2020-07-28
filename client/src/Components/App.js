@@ -8,7 +8,6 @@ import PhoneNumberRedeem from './PhoneNumberRedeem';
 import Redeemed from './Redeemed';
 import RedeemError from './RedeemError';
 const serverName = 'http://localhost:3000';
-//patch - /api/rx/{rxId}/{market:''}
 
 class App extends Component {
 
