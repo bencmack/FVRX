@@ -60,7 +60,7 @@ class RxDisplay extends Component {
                   Fruit and Vegetable Prescription // Receta de Frutas y Verduras
                 </p>
 
-                <QRCode value="http://www.nyp.org" />
+                <QRCode value="https://fvrx.azurewebsites.net/" />
 
                 <p className="Rx-subheader-text">
                   RxID: {this.props.rxId}
