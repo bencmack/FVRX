@@ -19,8 +19,8 @@ app.use(bodyParser.json());
 app.use('/api', routes);
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, '/../client/build')));
-//app.use(express.static('../client/build/'));
+//app.use(express.static(path.join(__dirname, '/../client/build')));
+app.use(express.static('../client/build/'));
 
 let forceVal = (process.env.ENVIRONMENT === 'development') ? true : false;
 
