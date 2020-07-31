@@ -45,7 +45,7 @@ class App extends Component {
     if (isNaN(redeemPhoneNumber) || redeemPhoneNumber.length !== 10) { //validate phone number format
       alert('Invalid phone number, please try again.') //throw error if format is invalid
     } else {
-      axios.get(`${serverName}/api/rx/${redeemPhoneNumber}`)//fetch rx for phone number from server`
+      axios.get(`/api/rx/${redeemPhoneNumber}`)//fetch rx for phone number from server`
         .then((res) => {
           //get the rx amount, clear the phone number entry, go to Redeemed page
           console.log(res);
@@ -66,7 +66,7 @@ class App extends Component {
     // const { redeemRxId } = this.state;
     // console.log(market);
     // //send selected market to server, update corresponding rxId
-    // axios.patch(`${serverName}/api/rx/${redeemRxId}`,{ market })
+    // axios.patch(`/api/rx/${redeemRxId}`,{ market })
     //   .then((res) => console.log(res))
     //     .catch((e) => console.log(e));
     this.setState({ redeemMarket: market });
@@ -118,7 +118,7 @@ class App extends Component {
     } else if (rxAmount === '0') { //validate an rxAmount is selected
       alert('Please select an Rx amount.') //throw error if rxAmount not selected
     } else { //create Rx
-      axios.post(`${serverName}/api/rx`,{ mrn: mrn, phone:phoneNumber, amount: rxAmount }) //send Rx data to server
+      axios.post(`/api/rx`,{ mrn: mrn, phone:phoneNumber, amount: rxAmount }) //send Rx data to server
         .then((res) => {
           console.log(res.data.payload);
           //if Rx creation successful, clear state, get RxId, go to RxDisplay
