@@ -1,8 +1,0 @@
-{
-    "appService.zipIgnorePattern": [
-        "node_modules{,/**}",
-        ".vscode{,/**}"
-    ],
-    "appService.defaultWebAppToDeploy": "/subscriptions/37382648-26df-4a70-84a9-abd9d84ccd57/resourceGroups/eus2-dev-analyticsweb-rg/providers/Microsoft.Web/sites/fvrx",
-    "appService.deploySubpath": "."
-}
