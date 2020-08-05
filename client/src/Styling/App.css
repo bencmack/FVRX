@@ -37,17 +37,6 @@
   margin-top: 20px;
 }
 
-.Rx-header-text {
-  font-size: 15px;
-  font-weight: 500;
-  color: red;
-}
-
-.Rx-subheader-text {
-  font-size: 14px;
-  font-weight: bold;
-}
-
 .Rx-header {
   display: flex;
   flex-direction: column;
@@ -60,22 +49,28 @@
   justify-content: center;
 }
 
+.Rx-header-text {
+  font-size: 14px;
+  font-weight: bold;
+  color: red;
+}
+
 .Rx-body-text-header {
-  font-size: 15px;
+  font-size: 13px;
+}
+
+.Rx-subheader-text {
+  font-size: 12px;
+  font-weight: bold;
 }
 
 .Rx-body-text {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .Rx-description {
-  width: 40%;
   padding-left: 10px;
   padding-right: 10px;
-}
-
-.pdf {
-  width: 50%;
 }
 
 .Redeemed-amount-display {
