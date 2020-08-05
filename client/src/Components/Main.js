@@ -4,12 +4,10 @@ import '../Styling/App.css';
 import Login from './Login';
 import RxDetails from './RxDetails';
 import RxDisplay from './RxDisplay';
-import PhoneNumberRedeem from './PhoneNumberRedeem';
 import Redeemed from './Redeemed';
-import RedeemError from './RedeemError';
-//const serverName = 'http://localhost:3000';
+//import RedeemError from './RedeemError';
 
-class App extends Component {
+class Main extends Component {
 
   constructor(props) {
     super(props);
@@ -31,6 +29,24 @@ class App extends Component {
     };
   };
 
+  componentDidMount() {
+    const { rxId } = this.props.match.params;
+    // rxId will be defined if user scans an Rx QR code
+    if (rxId !== undefined) {
+      this.setState({ redeemLoading: true });
+      axios.get(`/api/rx?rxId='${rxId}'`)//fetch rx for QR url from server
+        .then((res) => {
+          const { rxid, amount } = res.data.payload;
+          this.setState({ display: 'Redeemed', redeemRxId: rxid, redeemAmount: amount, redeemLoading: false });
+        })
+        .catch((e) => {
+          console.log(e);
+          alert("An error occured. Try entering the redeemer's phone number.");
+          this.setState({ redeemLoading: false });
+        });
+    };
+  };
+
   redeemPhoneNumberChange(evt) {
     //get the phone number entered by user
     this.setState({ redeemPhoneNumber: evt.target.value });
@@ -45,16 +61,15 @@ class App extends Component {
     if (isNaN(redeemPhoneNumber) || redeemPhoneNumber.length !== 10) { //validate phone number format
       alert('Invalid phone number, please try again.') //throw error if format is invalid
     } else {
-      axios.get(`/api/rx/${redeemPhoneNumber}`)//fetch rx for phone number from server`
+      axios.get(`/api/rx/${redeemPhoneNumber}`)//fetch rx for phone number from server
         .then((res) => {
           //get the rx amount, clear the phone number entry, go to Redeemed page
-          console.log(res);
           const { rxid, amount } = res.data.payload;
           this.setState({ display: 'Redeemed', redeemPhoneNumber: '', redeemRxId: rxid, redeemAmount: amount, redeemLoading: false });
         })
           .catch((e) => {
             console.log(e);
-            alert('An error occured. Check your entry and try again.')
+            alert('An error occured. Check your entry and try again.');
             this.setState({ redeemLoading: false });
           });
     };
@@ -120,7 +135,6 @@ class App extends Component {
     } else { //create Rx
       axios.post(`/api/rx`,{ mrn: mrn, phone:phoneNumber, amount: rxAmount }) //send Rx data to server
         .then((res) => {
-          console.log(res.data.payload);
           //if Rx creation successful, clear state, get RxId, go to RxDisplay
           const { rxid } = res.data.payload;
           this.setState({ display: 'RxDisplay', mrn: '', phoneNumber: '', rxAmount: '0', rxId: rxid, rxDetailsLoading: false });
@@ -165,14 +179,12 @@ class App extends Component {
                     onCreateRx={this.createRx.bind(this)}
                     loading={this.state.rxDetailsLoading}
                   />
-          break;
         case 'RxDisplay':
           return <RxDisplay
                     onLogOut={this.logOut.bind(this)}
                     onCreateNew={this.createNew.bind(this)}
                     rxId={this.state.rxId}
                   />
-          break;
         case 'Redeemed':
           return <Redeemed
                     onLogOut={this.logOut.bind(this)}
@@ -181,7 +193,6 @@ class App extends Component {
                     market={this.state.redeemMarket}
                     loading={this.state.redeemMarketLoading}
                   />
-          break;
         default:
           return <Login
                     redeemPhoneNumber={this.state.redeemPhoneNumber}
@@ -203,4 +214,4 @@ class App extends Component {
   };
 };
 
-export default App;
+export default Main;

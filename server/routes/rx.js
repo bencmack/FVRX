@@ -31,6 +31,43 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.get('/', async (req, res) => {
+  let { rxId } = req.query;
+
+  try {
+    let [rx, metadata] = await db.sequelize.query(`
+      SELECT * FROM rxes
+      WHERE rxid=${rxId} AND (expiryDate >= NOW() OR expiryDate is NULL)
+      ORDER BY createdAt DESC LIMIT 1
+      `)
+
+    let updateLatest = await db.models.Rx.update({
+      redeemDate: moment().format('YYYY-MM-DD HH:mm:ss'),
+      expiryDate: moment().add(1,'hour').format('YYYY-MM-DD HH:mm:ss')
+    },{
+      where: {rxid: rx.rxid}
+    });
+    //
+    // let [updatedRxes ,meta] = await db.sequelize.query(`
+    //   UPDATE rxes
+    //   SET expiryDate = NOW()
+    //   WHERE phone = "${rx.phone}" AND rxid <> "${rx.rxid}" AND expiryDate is NULL
+    //   `)
+
+
+    if (!rx) {
+      return res.status(404).send({error: 'No matching prescriptions'})
+    }
+    return res.status(200).send({payload: {
+      rxid: rx.rxid,
+      amount: rx.amount
+    }});
+  } catch (e) {
+    console.log(e)
+    return res.status(400).send({error: e || 'Error fetching prescription.'})
+  }
+});
+
 router.get('/:phone', async (req, res) => {
   let { phone } = req.params;
 

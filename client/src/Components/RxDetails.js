@@ -53,7 +53,7 @@ const RxDetails = (props) => {
           onChange={props.onPhoneNumberChange}
           className='input'
           placeholder=''
-          maxlength="10"
+          maxLength="10"
         />
       </div>
 
