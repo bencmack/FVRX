@@ -32,7 +32,7 @@ class RxDisplay extends Component {
               <p className="Rx-header-text">
                 Fruit and Vegetable Prescription // Receta de Frutas y Verduras
               </p>
-              <QRCode size={100} value={`https://fvrxstaging7.azurewebsites.net/#/${this.props.rxId}`} />
+              <QRCode size={100} value={`https://fvrx.azurewebsites.net/#/${this.props.rxId}`} />
               <p className="Rx-subheader-text">
                 RxID: {this.props.rxId}
               </p>
