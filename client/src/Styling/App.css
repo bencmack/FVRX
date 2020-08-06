@@ -15,10 +15,15 @@
   align-items: center;
 }
 
+.header_text {
+  text-align: center;
+}
+
 .subheader_1 {
   margin: 0;
   font-size: 22px;
   font-weight: 500;
+  text-align: center;
 }
 
 .subheader_1_with_margin {
@@ -31,6 +36,7 @@
 .subheader_2 {
   margin: 0;
   font-size: 18px;
+  text-align: center;
 }
 
 .RxDetails-field {
@@ -97,6 +103,17 @@
   flex-direction: column;
   align-items: center;
   margin-top: 10px;
+}
+
+.loading {
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  height: 50px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .button {

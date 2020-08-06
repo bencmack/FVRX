@@ -9,9 +9,11 @@ const Login = (props) => {
   let toggleRedeemLoading = () => {
     if (props.redeemLoading) {
       return (
-        <p className="subheader_2">
-          Loading...
-        </p>
+        <div className="loading">
+          <p className="subheader_2">
+            Loading...
+          </p>
+        </div>
       )
     } else {
       return (
@@ -33,7 +35,7 @@ const Login = (props) => {
 
       <header className="header">
         <img src={lettuce} alt='lettuce' width="112" height="88" />
-        <p>
+        <p className="header_text">
           Welcome to the FVRx Portal!
         </p>
         <img src={tomato} alt='tomato' width="95" height="89" />

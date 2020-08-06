@@ -4,7 +4,15 @@ import '../Styling/App.css';
 const Redeemed = (props) => {
 
   let toggleDisplay = () => {
-    if (props.market === '') {
+    if (props.loading) {
+      return (
+        <div className="Market-select">
+          <p className="subheader_1_with_margin">
+            Loading...
+          </p>
+        </div>
+      )
+    } else if (props.market === '') {
       return (
         <div className="Market-select">
           <p className="subheader_1_with_margin">
@@ -28,14 +36,6 @@ const Redeemed = (props) => {
           <button className="button-alt" onClick={() => props.onMarketSelect('Lincoln Hospital Greenmarket')}>
             Lincoln Hospital Greenmarket
           </button>
-        </div>
-      )
-    } else if (props.loading) {
-      return (
-        <div className="Market-select">
-          <p className="subheader_1_with_margin">
-            Loading...
-          </p>
         </div>
       )
     } else {

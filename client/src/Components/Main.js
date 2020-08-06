@@ -9,6 +9,7 @@ import Redeemed from './Redeemed';
 
 class Main extends Component {
 
+
   constructor(props) {
     super(props);
 
@@ -29,6 +30,7 @@ class Main extends Component {
     };
   };
 
+
   componentDidMount() {
     const { rxId } = this.props.match.params;
     // rxId will be defined if user scans an Rx QR code
@@ -36,6 +38,7 @@ class Main extends Component {
       this.setState({ redeemLoading: true });
       axios.get(`/api/rx?rxId='${rxId}'`)//fetch rx for QR url from server
         .then((res) => {
+          //get the rx amount, go to Redeemed page
           const { rxid, amount } = res.data.payload;
           this.setState({ display: 'Redeemed', redeemRxId: rxid, redeemAmount: amount, redeemLoading: false });
         })
@@ -47,10 +50,12 @@ class Main extends Component {
     };
   };
 
+
   redeemPhoneNumberChange(evt) {
     //get the phone number entered by user
     this.setState({ redeemPhoneNumber: evt.target.value });
   };
+
 
   redeem() {
     this.setState({ redeemLoading: true });
@@ -60,6 +65,7 @@ class Main extends Component {
 
     if (isNaN(redeemPhoneNumber) || redeemPhoneNumber.length !== 10) { //validate phone number format
       alert('Invalid phone number, please try again.') //throw error if format is invalid
+      this.setState({ redeemLoading: false });
     } else {
       axios.get(`/api/rx/${redeemPhoneNumber}`)//fetch rx for phone number from server
         .then((res) => {
@@ -69,28 +75,31 @@ class Main extends Component {
         })
           .catch((e) => {
             console.log(e);
-            alert('An error occured. Check your entry and try again.');
+            alert('An error occured. Either this prescription has already been redeemed or you entered the wrong phone number. Check your entry and try again.');
             this.setState({ redeemLoading: false });
           });
     };
   };
 
-  marketSelected(market) {
-    //this.setState({ redeemMarketLoading: true });
 
-    // const { redeemRxId } = this.state;
-    // console.log(market);
-    // //send selected market to server, update corresponding rxId
-    // axios.patch(`/api/rx/${redeemRxId}`,{ market })
-    //   .then((res) => console.log(res))
-    //     .catch((e) => console.log(e));
-    this.setState({ redeemMarket: market });
+  marketSelected(market) {
+    this.setState({ redeemMarketLoading: true });
+
+    const { redeemRxId } = this.state;
+    //send selected market to server, update corresponding rxId
+    axios.patch(`/api/rx/${redeemRxId}`,{ market })
+      .then((res) => {
+        this.setState({ redeemMarketLoading: false, redeemMarket: market });
+      })
+        .catch((e) => alert('An error occured, please try again.'));
   };
+
 
   pinChange(evt) {
     //get the pin value entered by user
     this.setState({ pin: evt.target.value });
   };
+
 
   logIn() {
     //get the pin from state
@@ -105,20 +114,24 @@ class Main extends Component {
     };
   };
 
+
   mrnChange(evt) {
     //get the MRN value entered by user
     this.setState({ mrn: evt.target.value });
   };
+
 
   phoneNumberChange(evt) {
     //get the phone number value entered by user
     this.setState({ phoneNumber: evt.target.value });
   };
 
+
   amountSelectChange(evt) {
     //get the amount value entered by user
     this.setState({ rxAmount: evt.target.value });
   };
+
 
   createRx() {
     this.setState({ rxDetailsLoading: true });
@@ -128,10 +141,13 @@ class Main extends Component {
 
     if (mrn.length < 1) { //validate an MRN was entered
       alert('Please enter an MRN.') //throw error if no MRN
+      this.setState({ rxDetailsLoading: false });
     } else if (isNaN(phoneNumber) || phoneNumber.length !== 10) { //validate phone number format
       alert('Please enter a valid phone number.') //throw error if format is invalid
+      this.setState({ rxDetailsLoading: false });
     } else if (rxAmount === '0') { //validate an rxAmount is selected
       alert('Please select an Rx amount.') //throw error if rxAmount not selected
+      this.setState({ rxDetailsLoading: false });
     } else { //create Rx
       axios.post(`/api/rx`,{ mrn: mrn, phone:phoneNumber, amount: rxAmount }) //send Rx data to server
         .then((res) => {
@@ -147,9 +163,11 @@ class Main extends Component {
     };
   };
 
+
   createNew() {
     this.setState({ display: 'RxDetails', rxId: '' });
   };
+
 
   logOut() {
     this.setState({
@@ -159,10 +177,12 @@ class Main extends Component {
       phoneNumber: '',
       rxAmount: '0',
       redeemPhoneNumber: '',
+      redeemMarket: '',
       rxId: '',
       rxDetailsLoading: false
     });
   };
+
 
   render() {
 

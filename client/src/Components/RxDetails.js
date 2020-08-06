@@ -6,9 +6,11 @@ const RxDetails = (props) => {
   let toggleLoading = () => {
     if (props.loading) {
       return (
-        <p className="subheader_2">
-          Loading...
-        </p>
+        <div className="loading">
+          <p className="subheader_2">
+            Loading...
+          </p>
+        </div>
       )
     } else {
       return (
