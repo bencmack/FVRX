@@ -57,19 +57,19 @@ class RxDisplay extends Component {
                   175th Street Greenmarket<br/>175th St. between Wadsworth & Broadway<br/>Thursday 8:00 AM - 4:00 PM
                 </p>
                 <p className="Rx-body-text">
-                  Inwood Greenmarket<br/>Isham Street between Seaman Ave & Cooper St.<br/>Saturday 8:00 AM – 3:00 PM
+                  Inwood Greenmarket<br/>Isham Street between Seaman Ave & Cooper St.<br/>Saturday 8:00 AM - 3:00 PM
                 </p>
                 <p className="Rx-body-text">
-                  Broadway Practice Youth Market<br/>Broadway between Dyckman St. & Cumming St.<br/>Wednesday 9:00 AM – 3:00 PM<br/>July 8 - August 26
+                  Broadway Practice Youth Market<br/>Broadway between Dyckman St. & Cumming St.<br/>Wednesday 9:00 AM - 3:00 PM<br/>July 8 - August 26
                 </p>
                 <p className="Rx-subheader-text">
                   BRONX
                 </p>
                 <p className="Rx-body-text">
-                  Bronx Borough Hall Greenmarket<br/>161st Street & Grand Concourse<br/>Tuesday 8:00 AM – 4:00 PM
+                  Bronx Borough Hall Greenmarket<br/>161st Street & Grand Concourse<br/>Tuesday 8:00 AM - 4:00 PM
                 </p>
                 <p className="Rx-body-text">
-                  Lincoln Hospital Greenmarket<br/>149th Street between Park & Morris Aves.<br/>Tuesday 8:00 AM – 3:00 PM<br/>Friday 8:00 AM – 3:00 PM
+                  Lincoln Hospital Greenmarket<br/>149th Street between Park & Morris Aves.<br/>Tuesday 8:00 AM - 3:00 PM<br/>Friday 8:00 AM - 3:00 PM
                 </p>
               </div>
 
@@ -84,25 +84,25 @@ class RxDisplay extends Component {
                   MANHATTAN
                 </p>
                 <p className="Rx-body-text">
-                  Fort Washington Greenmarket<br/>Calle 168 & Av. Fort Washington<br/>Martes 8:00 AM – 4:00 PM
+                  Fort Washington Greenmarket<br/>Calle 168 & Av. Fort Washington<br/>Martes 8:00 AM - 4:00 PM
                 </p>
                 <p className="Rx-body-text">
-                  175th Street Greenmarket<br/>Calle 175 entre Wadsworth & Broadway<br/>Jueves 8:00 AM – 4:00 PM
+                  175th Street Greenmarket<br/>Calle 175 entre Wadsworth & Broadway<br/>Jueves 8:00 AM - 4:00 PM
                 </p>
                 <p className="Rx-body-text">
-                  Inwood Greenmarket<br/>Calle Isham entre Av. Seaman & Calle Cooper<br/>Sabado 8:00 AM – 3:00 PM
+                  Inwood Greenmarket<br/>Calle Isham entre Av. Seaman & Calle Cooper<br/>Sabado 8:00 AM - 3:00 PM
                 </p>
                 <p className="Rx-body-text">
-                  Broadway Practice Youth Market<br/>Broadway entre Calle Dyckman & Calle Cumming<br/>Miercoles 9:00 AM – 3:00 PM<br/>Julio 8 - Agosto 26
+                  Broadway Practice Youth Market<br/>Broadway entre Calle Dyckman & Calle Cumming<br/>Miercoles 9:00 AM - 3:00 PM<br/>Julio 8 - Agosto 26
                 </p>
                 <p className="Rx-subheader-text">
                   BRONX
                 </p>
                 <p className="Rx-body-text">
-                  Bronx Borough Hall Greenmarket<br/>Calle 161 & Grand Concourse<br/>Martes 8:00 AM – 4:00 PM
+                  Bronx Borough Hall Greenmarket<br/>Calle 161 & Grand Concourse<br/>Martes 8:00 AM - 4:00 PM
                 </p>
                 <p className="Rx-body-text">
-                  Lincoln Hospital Greenmarket<br/>Calle 149 entre Av. Park & Av. Morris<br/>Martes 8:00 AM – 3:00 PM<br/>Viernes 8:00 AM – 3:00 PM
+                  Lincoln Hospital Greenmarket<br/>Calle 149 entre Av. Park & Av. Morris<br/>Martes 8:00 AM - 3:00 PM<br/>Viernes 8:00 AM - 3:00 PM
                 </p>
               </div>
 
